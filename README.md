@@ -1,5 +1,9 @@
 # Guide for Creating and Managing Open-Source Software
 
+<a href="https://eko.in" target="_blank">![Eko.in](https://img.shields.io/badge/Develop%20with-Eko.in-brightgreen)</a>
+<a href="https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fekoindia%2Faeps-gateway-lib" target="_blank"><img alt="Twitter" src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fekoindia%2Faeps-gateway-lib"></a>
+<a href="https://twitter.com/intent/follow?screen_name=ekospeaks" target="_blank">![Twitter Follow](https://img.shields.io/twitter/follow/ekospeaks?label=Follow&style=social)</a>
+
 ## Overview
 
 This guide provides detailed steps for creating a new open-source project or for open-sourcing existing closed projects. The guide also includes a comprehensive checklist for quality control, a curated list of tools, and best practices for ongoing maintenance. Additionally, it suggests metrics to measure the progress of your open-source efforts, and offers guidance on engaging contributors and building an active community.
@@ -8,7 +12,7 @@ Open-sourcing your projects involves much more than just publishing code. It req
 
 ---
 
-## Step-by-Step Process for Open-Sourcing Your Services
+## Step-by-Step Process for Open-Sourcing Existing Services
 
 ### 1. Evaluation and Preparation
 
@@ -20,6 +24,8 @@ Open-sourcing your projects involves much more than just publishing code. It req
   - Consider creating open alternatives or stubs for these components to ensure the project remains functional.
 - **License Selection**:
   - Decide on an open-source license that aligns with your business goals, such as **MIT** (permissive), **Apache 2.0** (permissive with patent protection), or **GPL** (copyleft).
+    - **GPL** may be preferred to ensure all derivative works are also open-source, along with explicit provisions regarding patent grants.
+    - **MIT** may be preferred for its simplicity and flexibility, including incorporation into proprietary projects.
   - Consult legal advisors to ensure compliance with relevant regulations and avoid risks related to intellectual property.
 
 ### 2. Documentation
@@ -171,7 +177,7 @@ Ensuring Docker-readiness is critical for both development and production enviro
 
 ---
 
-## Project Inventory for Open-Sourcing
+## Eko Project Inventory for Open-Sourcing
 
 To effectively manage the migration closed services to open-source, use the following inventory template to track each project:
 
@@ -185,7 +191,7 @@ To effectively manage the migration closed services to open-source, use the foll
 
 - **Codebase Location**: Specify whether the code is in **Azure Repo** or **GitHub**.
 
-- **Open-Source**: Indicate if the project is currently open-source (**yes/no**).
+- [] **Open-Source**: Indicate if the project is currently open-source (**yes/no**).
 
 - **Active Project**: Indicate if the project is actively maintained (**yes/no**).
 
