@@ -1,14 +1,45 @@
-# Guide for Creating and Managing Open-Source Software
+# Eko Open-Source Guidelines
+> Guide for creating and managing open-source software, including processes, tools, metrics, and best practices.
 
 <a href="https://eko.in" target="_blank">![Eko.in](https://img.shields.io/badge/Develop%20with-Eko.in-brightgreen)</a>
-<a href="https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fekoindia%2Faeps-gateway-lib" target="_blank"><img alt="Twitter" src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fekoindia%2Faeps-gateway-lib"></a>
+<a href="https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fekoindia%2Fopen-source-guidelines" target="_blank"><img alt="Twitter" src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fekoindia%2Fopen-source-guidelines"></a>
 <a href="https://twitter.com/intent/follow?screen_name=ekospeaks" target="_blank">![Twitter Follow](https://img.shields.io/twitter/follow/ekospeaks?label=Follow&style=social)</a>
+
+
+- [Overview](#overview)
+- [Step-by-Step Process for Open-Sourcing Existing Services](#step-by-step-process-for-open-sourcing-existing-services)
+  - [1. Evaluation and Preparation](#1-evaluation-and-preparation)
+  - [2. Documentation](#2-documentation)
+  - [3. Setting Up Repositories](#3-setting-up-repositories)
+  - [4. Security and Compliance](#4-security-and-compliance)
+  - [5. Setting Up CI/CD for Open Source](#5-setting-up-cicd-for-open-source)
+  - [6. Docker-Readiness for Development and Production](#6docker-readiness-for-development-and-production)
+  - [7. Building a Contributor Community](#7-building-a-contributor-community)
+  - [8. Post-Launch Management](#8-post-launch-management)
+- [Project Checklist](#project-checklist)
+- [Process Checklist](#process-checklist)
+- [Tools for Managing Open Source Projects](#tools-for-managing-open-source-projects)
+  - [Free and Open-Source Tools](#free-and-open-source-tools)
+  - [Recommended Tools (May Not Be Free)](#recommended-tools-may-not-be-free)
+- [Metrics to Track Open-Source Progress](#metrics-to-track-open-source-progress)
+  - [1. Project Conversion Metrics](#1-project-conversion-metrics)
+  - [2. Community Engagement Metrics](#2-community-engagement-metrics)
+  - [3. Code Quality Metrics](#3-code-quality-metrics)
+  - [4. Community Support Metrics](#4-community-support-metrics)
+- [Best Practices for Managing Open-Source Software](#best-practices-for-managing-open-source-software)
+  - [1. Code Quality and Readability](#1-code-quality-and-readability)
+  - [2. Contributor Friendliness](#2-contributor-friendliness)
+  - [3. Community Interaction](#3-community-interaction)
+- [Eko Project Inventory for Open-Sourcing](#eko-project-inventory-for-open-sourcing)
+- [Next Steps](#next-steps)
+
+
 
 ## Overview
 
-This guide provides detailed steps for creating a new open-source project or for open-sourcing existing closed projects. The guide also includes a comprehensive checklist for quality control, a curated list of tools, and best practices for ongoing maintenance. Additionally, it suggests metrics to measure the progress of your open-source efforts, and offers guidance on engaging contributors and building an active community.
+This guide provides detailed steps for creating a new open-source project or for open-sourcing existing closed projects. The guide also includes a comprehensive checklist for quality control, a curated list of tools, and best practices for ongoing maintenance. Additionally, it suggests metrics to measure the progress of open-sourcing efforts, and offers guidance on engaging contributors and building an active community.
 
-Open-sourcing your projects involves much more than just publishing code. It requires thoughtful preparation, a structured repository setup, robust documentation, community engagement, and a commitment to long-term maintenance. The benefits of open-sourcing include fostering innovation, gaining community contributions, and enhancing your brand within the developer ecosystem. This guide will help you effectively navigate all aspects of the open-sourcing journey.
+Open-sourcing a project involves much more than just publishing code. It requires thoughtful preparation, a structured repository setup, robust documentation, community engagement, and a commitment to long-term maintenance. The benefits of open-sourcing include fostering innovation, gaining community contributions, and enhancing the brand within the developer ecosystem. This guide will help you effectively navigate all aspects of the open-sourcing journey.
 
 ---
 
@@ -97,9 +128,60 @@ Ensuring Docker-readiness is critical for both development and production enviro
 
 ---
 
-## Checklist for Open-Sourcing
+## Project Checklist
 
--
+Use the following checklist to ensure that each project/service is ready for open-sourcing:
+
+- [ ] **Code Quality Audit**: Conduct a code quality review to ensure consistency, readability, and maintainability.
+- [ ] **Sensitive Data Removal**: Remove or sanitize sensitive data such as API keys, passwords, or confidential business logic.
+- [ ] **License Selection**: Choose an open-source license that aligns with your business goals. Prefer **GPL** for copyleft licensing of important projects or **MIT** for permissive licensing of simpler projects. Add `LICENSE` file to the repository.
+- [ ] **README file**: Add a `README.md` file with an overview, installation guide, contribution guidelines, and API documentation.
+- [ ] **Detailed Documentation**: Include detailed documentation in the `docs` folder. This should cover architecture, design decisions, features, and API specifications. Use markdown (.md) files.
+- [ ] **API Documentation**: Generate API documentation using tools like **Swagger** or **Redoc** for backend services.
+- [ ] **Changelog**: Add a `CHANGELOG.md` file for users and contributors to track _notable changes_ in each version. The latest version should come first. Add the following information for each version:
+  - **[Symantic Version Number](https://semver.org/)**
+  - **Release Date**
+  - **Summary of Changes** of following types: `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`.
+- [ ] **Repository Setup**: Create a repository with a clear naming convention and a well-defined branching strategy (`main`, `dev`, `feature`, and `hotfix` branches). The naming convention should be: `project-name-service-type`. For example, `connect-backend`, or, `connect-android-library`.
+- [ ] **Configuration Management**: Store configuration separately from code. Provide template configuration files (e.g., `.env.example`) to help developers set up quickly.
+- [ ] **Dependency Management**: Regularly audit dependencies to prevent vulnerabilities. Use tools like **OWASP Dependency-Check** or **npm audit**.
+- [ ] **Automated Testing**: Implement automated testing using tools like **Jest**, **JUnit**, or **Cypress**.
+- [ ] **Continuous Integration**: Set up CI/CD pipelines using tools like **GitHub Actions**,or **Jenkins**.
+- [ ] **Code Quality Tools**: Integrate static analysis tools like **SonarQube** or **CodeQL** into your CI/CD pipeline.
+- [ ] **Dockerfile**: Create a Dockerfile (`docker-compose.yml`) for each service and ensure that the service is Docker-ready for both local development and production environments.
+- [ ] **Contributor Guidelines**: Write a `CONTRIBUTING.md` file to guide external contributors. Define standards for code quality, testing, and submission processes. It should include the following:
+  - Overview of the branching model.
+  - Guidelines on where to branch from and where to merge.
+  - Links to additional resources or documentation.
+  - Code style guidelines
+  - Testing guidelines
+  - Here is an [example](https://gist.github.com/PurpleBooth/b24679402957c63ec426). _TODO: Links to CONTRIBUTING.md files in sample Java, Node.js, React and Android projects in the Eko GitHub repository._
+- [ ] **Pull Request Template**: Create a `PULL_REQUEST_TEMPLATE.md` file to guide contributors on what information to include in their pull requests.
+- [ ] **Code of Conduct**: Add a `CODE_OF_CONDUCT.md`, such as **[Contributor Covenant](https://www.contributor-covenant.org/)**, to foster a welcoming and inclusive community.
+- [ ] **Getting Started Guide**: Add a "Getting Started" section in the `README.md` file to guide to help developers set up their environment and understand the project architecture.
+- [ ] **Automated Release Notes**: Use tools like **[release-drafter](https://github.com/release-drafter/release-drafter)** to automatically generate release notes for each version to summarize new features, fixes, and other key updates.
+- [ ] **Vulnerability Disclosure Policy**: Publish a clear policy on how security vulnerabilities should be reported by external developers or users.
+- [ ] **License File**: Add a `LICENSE` file to the repository with the chosen open-source license.
+- [ ] **Docker Compose for Development**: Provide a `docker-compose.yml` file to make it easy for developers to spin up the necessary services locally.
+- [ ] **Production-Ready Docker Image**: Ensure that the Docker image used in production is secure, minimal, and optimized for performance.
+- [ ] **Environment Configuration**: Use environment variables to manage configuration, and ensure they are properly documented in `.env.example` files.
+- [ ] **Testing in Docker**: Integrate Docker-based testing within your CI/CD pipeline to ensure consistency across environments.
+- [ ] **Docker Hub or Registry**: Publish images to Docker Hub or a private container registry, and tag releases for consistency.
+
+
+
+---
+
+## Process Checklist
+
+Use the following checklist to ensure that the open-sourcing process is well-structured and comprehensive:
+
+- [ ] **Issue Triage**: Regularly triage open issues to prioritize bug fixes and new features. Assign issues to internal team members or mark them as **Help Wanted** to encourage community participation.
+- [ ] **Merge Reviews**: Set up a team rotation for reviewing pull requests, ensuring consistent quality and encouraging prompt feedback.
+- [ ] **Code Quality Audit**: Evaluate the current state of each service to ensure consistency, readability, and maintainability.
+- [ ] **Issue Labels**: Use GitHub Labels to organize issues and make it easy for contributors to understand which tasks are available. Include labels like **good first issue**, **help wanted**, **bug**, and **enhancement**.
+- [ ] **Community Engagement**: Regularly interact with the community through GitHub Discussions, Q&A forums, and other communication channels.
+
 
 ---
 
@@ -191,7 +273,7 @@ To effectively manage the migration closed services to open-source, use the foll
 
 - **Codebase Location**: Specify whether the code is in **Azure Repo** or **GitHub**.
 
-- [] **Open-Source**: Indicate if the project is currently open-source (**yes/no**).
+- **Open-Source**: Indicate if the project is currently open-source (**yes/no**).
 
 - **Active Project**: Indicate if the project is actively maintained (**yes/no**).
 
@@ -223,8 +305,8 @@ This inventory will help track each project's status, identify what is needed to
 
 ## Next Steps
 
+- **Inventory & Checklist**: Create an inventory of all services/projects to be open-sourced and track their readiness using the provided checklist.
 - **Initial Pilot**: Begin with a pilot by open-sourcing a simpler service. Use the experience gained to refine your open-sourcing process.
 - **Team Workshops**: Conduct internal workshops to align all developers and stakeholders on open-source best practices, goals, and expectations.
 - **Community Outreach**: Announce the first open-source project launch through social media, blog posts, and developer forums. Encourage developers to contribute and get involved.
-- **Continuous Improvement**: Regularly revisit and update this guide to reflect evolving best practices and lessons learned from your ongoing open-source initiatives.
-
+- **Continuous Improvement**: Regularly revisit and update this guide to reflect evolving best practices and lessons learned from the ongoing open-source initiatives.
