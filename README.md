@@ -17,6 +17,8 @@
   - [7. Building a Contributor Community](#7-building-a-contributor-community)
   - [8. Post-Launch Management](#8-post-launch-management)
 - [Project Checklist](#project-checklist)
+  - [Core Requirements](#core-requirements)
+  - [Other Requirements](#other-requirements)
 - [Process Checklist](#process-checklist)
 - [Tools for Managing Open Source Projects](#tools-for-managing-open-source-projects)
   - [Free and Open-Source Tools](#free-and-open-source-tools)
@@ -132,23 +134,13 @@ Ensuring Docker-readiness is critical for both development and production enviro
 
 Use the following checklist to ensure that each project/service is ready for open-sourcing:
 
-- [ ] **Code Quality Audit**: Conduct a code quality review to ensure consistency, readability, and maintainability.
-- [ ] **Sensitive Data Removal**: Remove or sanitize sensitive data such as API keys, passwords, or confidential business logic.
-- [ ] **License Selection**: Choose an open-source license that aligns with your business goals. Prefer **GPL** for copyleft licensing of important projects or **MIT** for permissive licensing of simpler projects. Add `LICENSE` file to the repository.
-- [ ] **README file**: Add a `README.md` file with an overview, installation guide, contribution guidelines, and API documentation.
-- [ ] **Detailed Documentation**: Include detailed documentation in the `docs` folder. This should cover architecture, design decisions, features, and API specifications. Use markdown (.md) files.
-- [ ] **API Documentation**: Generate API documentation using tools like **Swagger** or **Redoc** for backend services.
-- [ ] **Changelog**: Add a `CHANGELOG.md` file for users and contributors to track _notable changes_ in each version. The latest version should come first. Add the following information for each version:
-  - **[Symantic Version Number](https://semver.org/)**
-  - **Release Date**
-  - **Summary of Changes** of following types: `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`.
+### Core Requirements
+
 - [ ] **Repository Setup**: Create a repository with a clear naming convention and a well-defined branching strategy (`main`, `dev`, `feature`, and `hotfix` branches). The naming convention should be: `project-name-service-type`. For example, `connect-backend`, or, `connect-android-library`.
-- [ ] **Configuration Management**: Store configuration separately from code. Provide template configuration files (e.g., `.env.example`) to help developers set up quickly.
-- [ ] **Dependency Management**: Regularly audit dependencies to prevent vulnerabilities. Use tools like **OWASP Dependency-Check** or **npm audit**.
-- [ ] **Automated Testing**: Implement automated testing using tools like **Jest**, **JUnit**, or **Cypress**.
-- [ ] **Continuous Integration**: Set up CI/CD pipelines using tools like **GitHub Actions**,or **Jenkins**.
-- [ ] **Code Quality Tools**: Integrate static analysis tools like **SonarQube** or **CodeQL** into your CI/CD pipeline.
-- [ ] **Dockerfile**: Create a Dockerfile (`docker-compose.yml`) for each service and ensure that the service is Docker-ready for both local development and production environments.
+- [ ] **License Selection**: Choose an open-source license that aligns with your business goals. Prefer **GPL** for copyleft licensing of important projects or **MIT** for permissive licensing of simpler projects. Add `LICENSE` file to the repository.
+- [ ] **README file**: Add a `README.md` file with an overview, environment setup, installation guide, project architecture, contribution guidelines, API documentation, etc
+- [ ] **Sensitive Data Removal**: Remove or sanitize sensitive data such as API keys, passwords, or confidential business logic.
+- [ ] **Environment Configuration Management**: Store configuration separately from code. Use environment variables to manage configuration, and ensure they are properly documented in `.env.example` files.
 - [ ] **Contributor Guidelines**: Write a `CONTRIBUTING.md` file to guide external contributors. Define standards for code quality, testing, and submission processes. It should include the following:
   - Overview of the branching model.
   - Guidelines on where to branch from and where to merge.
@@ -157,18 +149,25 @@ Use the following checklist to ensure that each project/service is ready for ope
   - Testing guidelines
   - Here is an [example](https://gist.github.com/PurpleBooth/b24679402957c63ec426). _TODO: Links to CONTRIBUTING.md files in sample Java, Node.js, React and Android projects in the Eko GitHub repository._
 - [ ] **Pull Request Template**: Create a `PULL_REQUEST_TEMPLATE.md` file to guide contributors on what information to include in their pull requests.
+
+
+### Other Requirements
+
+- [ ] **Dockerfile**: Create a Dockerfile (`docker-compose.yml`) for each service and ensure that the service is Docker-ready for both local `development` and `production` environments.
+- [ ] **Automated Testing**: Implement automated testing using tools like **Jest**, **JUnit**, or **Cypress**.
+- [ ] **Continuous Integration**: Set up CI/CD pipelines using tools like **GitHub Actions**,or **Jenkins**.
+- [ ] **Code Quality Audit**: Conduct a code quality review to ensure consistency, readability, and maintainability.
+- [ ] **Code Quality Tools**: Integrate static analysis tools like **SonarQube** or **CodeQL** into your CI/CD pipeline.
+- [ ] **Detailed Documentation**: Include detailed documentation in the `docs` folder. This should cover architecture, design decisions, features, and API specifications. Use markdown (.md) files.
+- [ ] **API Documentation**: Generate API documentation using tools like **Swagger** or **Redoc** for backend services.
+- [ ] **Changelog**: Add a `CHANGELOG.md` file for users and contributors to track _notable changes_ in each version. The latest version should come first. Add the following information for each version:
+  - **[Symantic Version Number](https://semver.org/)**
+  - **Release Date**
+  - **Summary of Changes** of following types: `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`.
 - [ ] **Code of Conduct**: Add a `CODE_OF_CONDUCT.md`, such as **[Contributor Covenant](https://www.contributor-covenant.org/)**, to foster a welcoming and inclusive community.
-- [ ] **Getting Started Guide**: Add a "Getting Started" section in the `README.md` file to guide to help developers set up their environment and understand the project architecture.
 - [ ] **Automated Release Notes**: Use tools like **[release-drafter](https://github.com/release-drafter/release-drafter)** to automatically generate release notes for each version to summarize new features, fixes, and other key updates.
 - [ ] **Vulnerability Disclosure Policy**: Publish a clear policy on how security vulnerabilities should be reported by external developers or users.
-- [ ] **License File**: Add a `LICENSE` file to the repository with the chosen open-source license.
-- [ ] **Docker Compose for Development**: Provide a `docker-compose.yml` file to make it easy for developers to spin up the necessary services locally.
-- [ ] **Production-Ready Docker Image**: Ensure that the Docker image used in production is secure, minimal, and optimized for performance.
-- [ ] **Environment Configuration**: Use environment variables to manage configuration, and ensure they are properly documented in `.env.example` files.
-- [ ] **Testing in Docker**: Integrate Docker-based testing within your CI/CD pipeline to ensure consistency across environments.
-- [ ] **Docker Hub or Registry**: Publish images to Docker Hub or a private container registry, and tag releases for consistency.
-
-
+- [ ] **Dependency Management**: Regularly audit dependencies to prevent vulnerabilities. Use tools like **OWASP Dependency-Check** or **npm audit**.
 
 ---
 
