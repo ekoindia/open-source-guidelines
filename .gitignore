@@ -1,0 +1,19 @@
+# OS generated & miscellaneous files
+ehthumbs.db
+Thumbs.db
+.DS_Store
+*.pem
+*.bak
+
+# Editor directories and files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Build directories
+dist/
+build/
