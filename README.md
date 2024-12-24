@@ -17,7 +17,7 @@
   - [7. Building a Contributor Community](#7-building-a-contributor-community)
   - [8. Post-Launch Management](#8-post-launch-management)
 - [Project Checklist](#project-checklist)
-  - [Core Requirements](#core-requirements)
+  - [Essential Requirements](#essential-requirements)
   - [Other Requirements](#other-requirements)
 - [Process Checklist](#process-checklist)
 - [Tools for Managing Open Source Projects](#tools-for-managing-open-source-projects)
@@ -66,8 +66,9 @@ Open-sourcing a project involves much more than just publishing code. It require
 - **Create a README File**: This is often the first point of interaction for potential contributors or users. Make it engaging and informative. Include:
   - **Project Overview**: Explain what the project does, why it exists, and what problems it solves.
   - **Features and Roadmap**: Describe key features, current progress, and planned future improvements.
-  - **Installation Guide**: Provide clear, step-by-step instructions for setting up the development environment.
+  - **Getting Started / Installation Guide**: Provide clear, step-by-step instructions for setting up the development environment.
   - **Contribution Guidelines**: Describe how others can contribute, including code style, branch conventions, and steps to submit pull requests.
+  - **Help & Support**: Provide contact information or links to community forums for support.
 - **Code Comments**: Ensure that each module is thoroughly commented to explain its purpose and any critical logic that might be non-intuitive.
 - **API Documentation**: Use free and open-source tools like **Swagger** or **Redoc** to generate thorough and interactive API documentation, especially for backend services utilizing **SpringBoot** or **Node.js**.
 - **Changelog and History**: Maintain a changelog to track what changes have been made in each version.
@@ -113,6 +114,9 @@ Ensuring Docker-readiness is critical for both development and production enviro
 ### 7. Building a Contributor Community
 
 - **Contribution Guidelines**: Write a CONTRIBUTING.md file to guide external contributors. Define standards for code quality, testing, and submission processes.
+  - For the repository owner, contribution guidelines are a way to communicate how people should contribute.
+  - For contributors, the guidelines help them verify that they're submitting well-formed pull requests and opening useful issues.
+  - For both owners and contributors, contribution guidelines save time and hassle caused by improperly created pull requests or issues that have to be rejected and re-submitted.
   - Encourage contributions with examples such as **fixing typos**, **documenting features**, or **adding tests**.
 - **Code of Conduct**: Add a code of conduct, such as **Contributor Covenant**, to foster a welcoming and inclusive community.
 - **Label Management**: Use GitHub Labels to organize issues and make it easy for contributors to understand which tasks are available. Examples include:
@@ -134,29 +138,38 @@ Ensuring Docker-readiness is critical for both development and production enviro
 
 Use the following checklist to ensure that each project/service is ready for open-sourcing:
 
-### Core Requirements
+### Essential Requirements
 
 - [ ] **Repository Setup**: Create a repository with a clear naming convention and a well-defined branching strategy (`main`, `dev`, `feature`, and `hotfix` branches). The naming convention should be: `project-name-service-type`. For example, `connect-backend`, or, `connect-android-library`.
 - [ ] **License Selection**: Choose an open-source license that aligns with your business goals. Prefer **GPL** for copyleft licensing of important projects or **MIT** for permissive licensing of simpler projects. Add `LICENSE` file to the repository.
 - [ ] **README file**: Add a `README.md` file with an overview, environment setup, installation guide, project architecture, contribution guidelines, API documentation, etc
 - [ ] **Sensitive Data Removal**: Remove or sanitize sensitive data such as API keys, passwords, or confidential business logic.
 - [ ] **Environment Configuration Management**: Store configuration separately from code. Use environment variables to manage configuration, and ensure they are properly documented in `.env.example` files.
+- [ ] **Code Higiene**: Ensure the following tooling integrations are in place:
+  - [ ] Add `.gitignore` file to exclude unnecessary and sensitive files from version control.
+  - [ ] Add `.aiignore` file to exclude unnecessary and sensitive files from AI model training.
+  - [ ] Maintain consistent coding style and formatting using tools like **Prettier** or **Checkstyle**.
+  - [ ] Use linting tools like **ESLint** for JavaScript/TypeScript and **PMD** for Java to catch common issues early.
+  - [ ] Ensure that each module/function is thoroughly commented using JSDoc or JavaDoc standards to explain its purpose, inputs, and return values.
 - [ ] **Contributor Guidelines**: Write a `CONTRIBUTING.md` file to guide external contributors. Define standards for code quality, testing, and submission processes. It should include the following:
   - Overview of the branching model.
   - Guidelines on where to branch from and where to merge.
   - Links to additional resources or documentation.
-  - Code style guidelines
-  - Testing guidelines
+  - Code style guidelines.
+  - Testing guidelines.
   - Here is an [example](https://gist.github.com/PurpleBooth/b24679402957c63ec426). _TODO: Links to CONTRIBUTING.md files in sample Java, Node.js, React and Android projects in the Eko GitHub repository._
 - [ ] **Pull Request Template**: Create a `PULL_REQUEST_TEMPLATE.md` file to guide contributors on what information to include in their pull requests.
 
 
 ### Other Requirements
 
-- [ ] **Dockerfile**: Create a Dockerfile (`docker-compose.yml`) for each service and ensure that the service is Docker-ready for both local `development` and `production` environments.
+- [ ] **Dockerfile**: Create a `Dockerfile` (and `docker-compose.yml`, if required) for each service and ensure that the service is Docker-ready for both local `development` and `production` environments.
 - [ ] **Automated Testing**: Implement automated testing using tools like **Jest**, **JUnit**, or **Cypress**.
-- [ ] **Continuous Integration**: Set up CI/CD pipelines using tools like **GitHub Actions**,or **Jenkins**.
-- [ ] **Code Quality Audit**: Conduct a code quality review to ensure consistency, readability, and maintainability.
+- [ ] **Test Coverage**: Setup test coverage reports to ensure that at least **80%** of the code is covered by tests.
+- [ ] **Continuous Integration**: Set up CI/CD pipelines using tools like **GitHub Actions**,or **Jenkins** to ensure the following:
+  - [ ] Automated linting checks and code formatting on each commit.
+  - [ ] Automated testing on each commit (or, merge into main and dev branches).
+  - [ ] Automated deployment of release candidates.
 - [ ] **Code Quality Tools**: Integrate static analysis tools like **SonarQube** or **CodeQL** into your CI/CD pipeline.
 - [ ] **Detailed Documentation**: Include detailed documentation in the `docs` folder. This should cover architecture, design decisions, features, and API specifications. Use markdown (.md) files.
 - [ ] **API Documentation**: Generate API documentation using tools like **Swagger** or **Redoc** for backend services.
@@ -167,7 +180,6 @@ Use the following checklist to ensure that each project/service is ready for ope
 - [ ] **Code of Conduct**: Add a `CODE_OF_CONDUCT.md`, such as **[Contributor Covenant](https://www.contributor-covenant.org/)**, to foster a welcoming and inclusive community.
 - [ ] **Automated Release Notes**: Use tools like **[release-drafter](https://github.com/release-drafter/release-drafter)** to automatically generate release notes for each version to summarize new features, fixes, and other key updates.
 - [ ] **Vulnerability Disclosure Policy**: Publish a clear policy on how security vulnerabilities should be reported by external developers or users.
-- [ ] **Dependency Management**: Regularly audit dependencies to prevent vulnerabilities. Use tools like **OWASP Dependency-Check** or **npm audit**.
 
 ---
 
@@ -180,6 +192,7 @@ Use the following checklist to ensure that the open-sourcing process is well-str
 - [ ] **Code Quality Audit**: Evaluate the current state of each service to ensure consistency, readability, and maintainability.
 - [ ] **Issue Labels**: Use GitHub Labels to organize issues and make it easy for contributors to understand which tasks are available. Include labels like **good first issue**, **help wanted**, **bug**, and **enhancement**.
 - [ ] **Community Engagement**: Regularly interact with the community through GitHub Discussions, Q&A forums, and other communication channels.
+- [ ] **Dependency Management**: Regularly audit dependencies to prevent vulnerabilities. Use tools like **OWASP Dependency-Check** or **npm audit**.
 
 
 ---
