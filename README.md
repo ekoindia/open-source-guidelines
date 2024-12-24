@@ -75,13 +75,19 @@ Open-sourcing a project involves much more than just publishing code. It require
 
 ### 3. Setting Up Repositories
 
-- **Repo Naming Conventions**: Maintain consistent, descriptive naming conventions for GitHub or GitLab repositories to ensure clarity. Include the project name, the type of service, and its purpose in the repository name.
+- **Repo Naming Conventions**: Maintain consistent, descriptive naming conventions for GitHub or GitLab repositories to ensure clarity.
+  - Use kebab-case for repository names (each word in lower case, and separated by hyphens).
+  - Include the project name, the type of service, and its purpose in the repository name.
 - **Branch Strategy**:
   - Establish and communicate a clear branching strategy. Main branches should include `main` (for stable releases) and `dev` (for ongoing development).
   - Use **feature branching** for new features or major changes, and **hotfix branches** for urgent fixes.
+    - Example: `feature/new-authentication`, `hotfix/bug-fix-123`.
   - Tag stable releases appropriately to provide checkpoints for developers who want to work with specific versions.
 - **Configuration Management**:
-  - Store configuration separately from code, utilizing **environment variables** or free configuration management tools like **Dotenv** or **Confd**.
+  - Store configuration separately from code, utilizing **environment variables** or free configuration management tools like **Dotenv**.
+    - **[Dotenv](https://www.npmjs.com/package/dotenv)** is a popular tool for managing environment variables in Node.js projects.
+    - **[Spring Cloud Config](https://docs.spring.io/spring-cloud-config/docs/current/reference/html/)** is a robust solution for Java-based services.
+    - **[AWS Secrets Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html)** or **[Azure Key Vault](https://learn.microsoft.com/en-us/azure/key-vault/general/basic-concepts)** can be used for secure storage of sensitive data.
   - Provide template configuration files (e.g., `.env.example`) to help developers set up quickly.
 
 ### 4. Security and Compliance
@@ -97,7 +103,7 @@ Open-sourcing a project involves much more than just publishing code. It require
 - **Continuous Integration**: Use free-tier or open-source tools like **GitHub Actions**, **Travis CI** (free for open-source projects), or **Jenkins** to automate the testing and deployment of services when changes are merged.
 - **Code Quality Tools**: Enforce coding standards using **ESLint** for JavaScript/TypeScript and **PMD** for Java to catch common issues early. Both tools are open source and widely adopted.
 - **Release Automation**:
-  - Use tools like [**semantic-release**](https://semantic-release.gitbook.io/) to automate versioning and changelog generation based on commit messages. **Semantic-release** is free and integrates well with GitHub.
+  - Use tools like **[semantic-release](https://semantic-release.gitbook.io/)** to automate versioning and changelog generation based on commit messages. **Semantic-release** is free and integrates well with GitHub.
   - Automate deployments for critical services, including release candidates, through your CI/CD pipeline using free-tier CI tools.
 
 ### 6. Docker-Readiness for Development and Production
@@ -113,21 +119,22 @@ Ensuring Docker-readiness is critical for both development and production enviro
 
 ### 7. Building a Contributor Community
 
-- **Contribution Guidelines**: Write a CONTRIBUTING.md file to guide external contributors. Define standards for code quality, testing, and submission processes.
+- **Contribution Guidelines**: Add a [.github/CONTRIBUTING.md](./examples/CONTRIBUTING.md) file to guide external contributors. Define standards for code quality, testing, and submission processes.
   - For the repository owner, contribution guidelines are a way to communicate how people should contribute.
   - For contributors, the guidelines help them verify that they're submitting well-formed pull requests and opening useful issues.
   - For both owners and contributors, contribution guidelines save time and hassle caused by improperly created pull requests or issues that have to be rejected and re-submitted.
   - Encourage contributions with examples such as **fixing typos**, **documenting features**, or **adding tests**.
-- **Code of Conduct**: Add a code of conduct, such as **Contributor Covenant**, to foster a welcoming and inclusive community.
-- **Label Management**: Use GitHub Labels to organize issues and make it easy for contributors to understand which tasks are available. Examples include:
-  - **Good First Issue**: For beginners.
-  - **Help Wanted**: For more complex problems that need assistance.
-  - **Bug** and **Feature Request**: Clearly categorize issues.
-- **Documentation for New Contributors**: Create a "Getting Started" guide to help developers set up their environment and understand the project architecture. This can help reduce onboarding time for new contributors.
+- **Code of Conduct**: Add a [.github/CODE_OF_CONDUCT.md](./examples/CODE_OF_CONDUCT.md), such as **Contributor Covenant**, to foster a welcoming and inclusive community.
+- **Label Management**: Use GitHub Labels/Tags to organize issues and make it easy for contributors to understand which tasks are available. Examples include:
+  - **`good first issue`**: For beginners.
+  - **`help wanted`**: For more complex problems that need assistance.
+  - **`bug`** and **`enhancement`**: Clearly categorize issues.
+  - **`needs triage`**: For new issues that need further evaluation.
+- **Documentation for New Contributors**: Create a "Getting Started" guide (in the README.md file) to help developers set up their environment and understand the project architecture. This can help reduce onboarding time for new contributors.
 
 ### 8. Post-Launch Management
 
-- **Issue Triage**: Regularly triage open issues to prioritize bug fixes and new features. Assign issues to internal team members or mark them as **Help Wanted** to encourage community participation.
+- **Issue Triage**: Regularly triage open issues to prioritize bug fixes and new features. Assign issues to internal team members or mark them as **`help wanted`** to encourage community participation.
 - **Merge Reviews**: Set up a team rotation for reviewing pull requests, ensuring consistent quality and encouraging prompt feedback.
 - **Automated Release Notes**: Use free tools like **release-drafter** to automatically generate release notes that summarize new features, fixes, and other key updates in each release.
 - **Community Engagement**: Regularly interact with the community through GitHub Discussions, Q&A forums, and other communication channels.
@@ -157,8 +164,10 @@ Use the following checklist to ensure that each project/service is ready for ope
   - Links to additional resources or documentation.
   - Code style guidelines.
   - Testing guidelines.
-  - Here is an [example](https://gist.github.com/PurpleBooth/b24679402957c63ec426). _TODO: Links to CONTRIBUTING.md files in sample Java, Node.js, React and Android projects in the Eko GitHub repository._
-- [ ] **Pull Request Template**: Create a `PULL_REQUEST_TEMPLATE.md` file to guide contributors on what information to include in their pull requests.
+  - Here is an [example](./examples/CONTRIBUTING.md).
+  - _Note: For Eko's github repositories,a default template has already been created, which will be used for all repositories._
+- [ ] **Pull Request Template**: Create a `PULL_REQUEST_TEMPLATE.md` file to guide contributors on what information to include in their pull requests. _Note: For Eko's github repositories,a default template has already been created, which will be used for all repositories._
+- [ ] **Issue Templates**: Create templates for different types of issues (e.g., bug report, feature request) in the `.github/ISSUE_TEMPLATE/` directory. See examples [here](./examples/ISSUE_TEMPLATE). _Note: For Eko's github repositories,a default templates have already been created, which will be used for all repositories._
 
 
 ### Other Requirements
