@@ -111,7 +111,8 @@ Open-sourcing a project involves much more than just publishing code. It require
 Ensuring Docker-readiness is critical for both development and production environments. Docker enables consistent environments, making it easier for both contributors and production systems to replicate and maintain your services. Below are key considerations for Docker-readiness:
 
 - **Dockerfile Creation:** Create and maintain a Dockerfile for each service. Ensure that the Dockerfile follows best practices, such as minimizing image size and using multi-stage builds where applicable.
-- **Docker Compose for Development:** Provide a `docker-compose.yml` file to make it easy for developers to spin up the necessary services locally.
+- **.dockerignore File:** Exclude unnecessary files from the Docker build context using a `.dockerignore` file to reduce image size and build time. See an example [here](./examples/.dockerignore) for a Javascript/Node.js app.
+- **Docker Compose for Development:** Provide a `docker-compose.yml` file to make it easy for developers to spin up the necessary services locally. [See examples for different tach-stack here](https://github.com/docker/awesome-compose). Note: these examples are not to be directly used in production!
 - **Production-Ready Docker Image:** Ensure that the Docker image used in production is secure, minimal, and optimized for performance.
 - **Environment Configuration:** Use environment variables to manage configuration, and ensure they are properly documented in .env.example files.
 - **Testing in Docker:** Integrate Docker-based testing within your CI/CD pipeline to ensure consistency across environments.
@@ -172,7 +173,7 @@ Use the following checklist to ensure that each project/service is ready for ope
 
 ### Other Requirements
 
-- [ ] **Dockerfile**: Create a `Dockerfile` (and `docker-compose.yml`, if required) for each service and ensure that the service is Docker-ready for both local `development` and `production` environments.
+- [ ] **Dockerfile**: Create a `Dockerfile` (and `docker-compose.yml`, if required) for each service and ensure that the service is Docker-ready for both local `development` and `production` environments. (See [docker-compose examples here](https://github.com/docker/awesome-compose).)
 - [ ] **Automated Testing**: Implement automated testing using tools like **Jest**, **JUnit**, or **Cypress**.
 - [ ] **Test Coverage**: Setup test coverage reports to ensure that at least **80%** of the code is covered by tests.
 - [ ] **Continuous Integration**: Set up CI/CD pipelines using tools like **GitHub Actions**,or **Jenkins** to ensure the following:
