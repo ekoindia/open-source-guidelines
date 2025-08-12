@@ -61,7 +61,7 @@ services:
 * Open your browser: `http://your-sonar-url`  
 * Login: `admin / admin`  
 * Go to `Administration > System > About`  
-* You should see: **SonarQube 8.9.10 (Community Edition)**
+* You should see: **SonarQube**
 
 ---
 
