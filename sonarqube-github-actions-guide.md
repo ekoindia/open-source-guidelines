@@ -1,6 +1,6 @@
 # SonarQube Integration with Unit Testing
 
-To ensure compatibility with **Java** and **JS Projects** and support legacy services, we use **SonarQube LTS 8.9.10 Community Edition** in a Dockerized setup.
+We use **SonarQube** in a Dockerized setup.
 
 ### **Prerequisites**
 
@@ -11,11 +11,11 @@ To ensure compatibility with **Java** and **JS Projects** and support legacy ser
 Use this for local development or quick scanning.
 
 ```yaml
-  docker pull sonarqube:8.9.10-community
+  docker pull sonarqube
   docker run -d --name sonarqube-lts \
     -p 9000:9000 \
     -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true \
-    sonarqube:8.9.10-community
+    sonarqube
 ```
 
 * Visit: [http://localhost:9000](http://localhost:9000)  
@@ -32,7 +32,7 @@ The same can be done using a docker-compose.yml file, just follow the steps belo
 version: '3.8'
 services:
   sonarqube:
-    image: sonarqube:8.9-community
+    image: sonarqube
     container_name: sonarqube
     restart: always
     environment:
@@ -65,14 +65,14 @@ services:
 
 ---
 
-* The project\_name and project\_token are generated whenever a new project is created on **SonarQube.**  
+* The project_name and project_token are generated whenever a new project is created on **SonarQube.**  
 * The above code snippet will also be generated individually whenever a new project is created on **SonarQube.**
 
-# SonarQube CE 8.9 Integration with GitHub Actions (JavaScript Project)
+# SonarQube Integration with GitHub Actions
 
 ## Prerequisites
 
-1. **SonarQube CE 8.9** is installed and accessible at: `https://your-sonar-url`.
+1. **SonarQube** is installed and accessible at: `https://your-sonar-url`.
 2. A **SonarQube admin account** to create projects and tokens.
 3. Your project is hosted on **GitHub**.
 4. You have access to the **SonarQube server token** (global or project-specific).
@@ -81,11 +81,11 @@ services:
 
 ## 1. Create a Project in SonarQube
 
-1. Visit your SonarQube instance (`https://lint.eko.in`).
+1. Visit your SonarQube instance (`https://your-sonar-url`).
 2. Go to **Projects** → **Create Project**.
 3. Choose **Manually**, then:
-   - **Project Key**: `your-js-project` (must match in code and UI)
-   - **Display Name**: `Your JS Project`
+   - **Project Key**: `your-project` (must match in code and UI)
+   - **Display Name**: `Your Project`
 4. After creation, you'll be prompted to generate a **token**.
    - **Use your global token** or **create a new one**.
    - Save this token securely.
@@ -97,9 +97,7 @@ services:
 Create a file named `sonar-project.properties` in the **root of your repo**:
 
 ```
-sonar.projectKey=your-project
-sonar.projectName=Your Project
-sonar.host.url=https://your-sonar-url
+sonar.projectName=YourProject
 sonar.sources=src
 ```
 
@@ -115,6 +113,12 @@ sonar.sources=src
    - **Name**: `SONAR_TOKEN`
    - **Value**: Your SonarQube token (global or project-specific)
 
+   - **Name**: `SONAR_HOST_URL`
+   - **Value**: Your SonarQube url
+
+   - **Name**: `SONAR_PROJECT_KEY`
+   - **Value**: The Project Key that is present on the UI and should match with the one in Github Secrets. A separate secret shall be created for each repo.
+
 ---
 
 ## 4. Set Up GitHub Actions Workflow
@@ -123,45 +127,54 @@ Create the file: `.github/workflows/sonar.yml`
 
 ###### For JS Projects:
 
-```
+```yaml
 name: SonarQube Scan
- 
+
 on:
   push:
     branches:
       - main
       - dev
- 
+
 jobs:
   sonarqube:
     runs-on: ubuntu-latest
- 
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
- 
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
- 
+          node-version: '20' # or '18' depending on your project
+          cache: 'npm'
+
       - name: Install dependencies
         run: npm ci
- 
-      - name: Run tests to generate coverage
-        run: |
-          npm run test -- --coverage
- 
+
+      - name: Run tests with coverage
+        run: npm test -- --coverage
+
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v1.2
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          args: >
+            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+
+      - name: SonarQube Quality Gate
+        uses: SonarSource/sonarqube-quality-gate-action@v1.1
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 ```
 
 ###### For Java Projects:
 
-```
+```yaml
 name: SonarQube Scan (Java)
 
 on:
@@ -181,7 +194,7 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '17' # set depending on your project
           distribution: 'temurin'
           cache: maven
 
@@ -195,7 +208,7 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         with:
           args: >
-            -Dsonar.projectKey=your-java-project
+            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
             -Dsonar.java.binaries=target/classes
             -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
 
@@ -239,6 +252,6 @@ sudo systemctl reload nginx
 
 ## 7. Notes
 
-- SonarQube CE does **not support PR decoration** (Enterprise feature), but will still scan on `push to dev` and `merge` events.
+- SonarQube scans on `push to branch` and `merge` events.
 - You **do not need to recreate** the project every time — once created, just reuse the `projectKey`.
 - Multiple repos can use the **same global token**, provided the user has access.
