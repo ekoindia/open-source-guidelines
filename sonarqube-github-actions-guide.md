@@ -2,11 +2,11 @@
 
 We use **SonarQube** in a Dockerized setup.
 
-### **Prerequisites**
+### Prerequisites
 
-* Docker installed (`docker -v`)
+- Docker installed (`docker -v`)
 
-### **Quick Start (Standalone Container)**
+### Quick Start (Standalone Container)
 
 Use this for local development or quick scanning.
 
@@ -56,7 +56,7 @@ services:
   docker-compose up -d
 ```
 
-### **Verifying Installation**
+### Verifying Installation
 
 * Open your browser: `http://your-sonar-url`  
 * Login: `admin / admin`  
@@ -65,7 +65,7 @@ services:
 
 ---
 
-* The project_name and project_token are generated whenever a new project is created on **SonarQube.**  
+* The `project_name` and `project_token` are generated whenever a new project is created on **SonarQube.**  
 * The above code snippet will also be generated individually whenever a new project is created on **SonarQube.**
 
 # SonarQube Integration with GitHub Actions
@@ -99,9 +99,11 @@ services:
 3. Add:
    - **Name**: `SONARQUBE_TOKEN`
    - **Value**: Your SonarQube token (global or project-specific)
+   - **NOTE:** This is not needed for _public_ repositories because an organization-level secret is already added with the global token.
 
    - **Name**: `SONARQUBE_HOST_URL`
    - **Value**: Your SonarQube url
+   - **NOTE:** This is not needed for _public_ repositories because an organization-level secret is already added with the global token.
 
    - **Name**: `SONARQUBE_PROJECT_KEY`
    - **Value**: The Project Key that is present on the UI and should match with the one in Github Secrets. A separate secret shall be created for each repo.
@@ -133,7 +135,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # or '18' depending on your project
+          node-version: '20'
           cache: 'npm'
 
       - name: Install dependencies
@@ -204,7 +206,7 @@ jobs:
 
 ## 4. Validate the Setup
 
-1. Push your code to `main` or `dev`.
+1. Push your code to `dev` branch.
 2. Navigate to **GitHub Actions** in your repo to see the workflow run.
 3. Visit `https://your-sonar-url` → Check that your project appears and scan results show up.
 
