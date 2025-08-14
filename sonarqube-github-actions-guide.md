@@ -205,7 +205,7 @@ jobs:
             -Dsonar.sourceEncoding=UTF-8
 
       - name: SonarQube Quality Gate
-        uses: SonarSource/sonarqube-quality-gate-action@v1.1
+        uses: SonarSource/sonarqube-quality-gate-action@v1.0
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 ```
