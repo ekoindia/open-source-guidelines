@@ -97,13 +97,13 @@ services:
 1. Go to your GitHub repository → **Settings** → **Secrets and variables** → **Actions**.
 2. Click **"New repository secret"**.
 3. Add:
-   - **Name**: `SONAR_TOKEN`
+   - **Name**: `SONARQUBE_TOKEN`
    - **Value**: Your SonarQube token (global or project-specific)
 
-   - **Name**: `SONAR_HOST_URL`
+   - **Name**: `SONARQUBE_HOST_URL`
    - **Value**: Your SonarQube url
 
-   - **Name**: `SONAR_PROJECT_KEY`
+   - **Name**: `SONARQUBE_PROJECT_KEY`
    - **Value**: The Project Key that is present on the UI and should match with the one in Github Secrets. A separate secret shall be created for each repo.
 
 ---
@@ -145,11 +145,11 @@ jobs:
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v1.2
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONARQUBE_HOST_URL }}
         with:
           args: >
-            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+            -Dsonar.projectKey=${{ secrets.SONARQUBE_PROJECT_KEY }}
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
             -Dsonar.projectName=Your-JS-Project
             -Dsonar.sources=.
@@ -188,11 +188,11 @@ jobs:
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v1.2
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONARQUBE_HOST_URL }}
         with:
           args: >
-            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+            -Dsonar.projectKey=${{ secrets.SONARQUBE_PROJECT_KEY }}
             -Dsonar.java.binaries=target/classes
             -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
             -Dsonar.projectName=Your-Java-Project
