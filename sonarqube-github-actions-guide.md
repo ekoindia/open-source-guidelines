@@ -92,20 +92,7 @@ services:
 
 ---
 
-## 2. Add `sonar-project.properties` to Your Repo
-
-Create a file named `sonar-project.properties` in the **root of your repo**:
-
-```
-sonar.projectName=YourProject
-sonar.sources=src
-```
-
-- Adjust `sonar.sources` if your source files are located elsewhere (e.g., `src/app`, `lib`, etc.).
-
----
-
-## 3. Add Sonar Token to GitHub Secrets
+## 2. Add Sonar Token to GitHub Secrets
 
 1. Go to your GitHub repository → **Settings** → **Secrets and variables** → **Actions**.
 2. Click **"New repository secret"**.
@@ -121,7 +108,7 @@ sonar.sources=src
 
 ---
 
-## 4. Set Up GitHub Actions Workflow
+## 3. Set Up GitHub Actions Workflow
 
 Create the file: `.github/workflows/sonar.yml`
 
@@ -133,7 +120,6 @@ name: SonarQube Scan
 on:
   push:
     branches:
-      - main
       - dev
 
 jobs:
@@ -165,6 +151,10 @@ jobs:
           args: >
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.projectName=Your-JS-Project
+            -Dsonar.sources=.
+            -Dsonar.exclusions=node_modules/**,dist/**
+            -Dsonar.sourceEncoding=UTF-8
 
       - name: SonarQube Quality Gate
         uses: SonarSource/sonarqube-quality-gate-action@v1.1
@@ -180,7 +170,6 @@ name: SonarQube Scan (Java)
 on:
   push:
     branches:
-      - main
       - dev
 
 jobs:
@@ -211,6 +200,9 @@ jobs:
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
             -Dsonar.java.binaries=target/classes
             -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+            -Dsonar.projectName=Your-Java-Project
+            -Dsonar.sources=src
+            -Dsonar.sourceEncoding=UTF-8
 
       - name: SonarQube Quality Gate
         uses: SonarSource/sonarqube-quality-gate-action@v1.1
@@ -220,7 +212,7 @@ jobs:
 
 ---
 
-## 5. Validate the Setup
+## 4. Validate the Setup
 
 1. Push your code to `main` or `dev`.
 2. Navigate to **GitHub Actions** in your repo to see the workflow run.
@@ -228,7 +220,7 @@ jobs:
 
 ---
 
-## 6. Optional: Handling Large Reports
+## 5. Optional: Handling Large Reports
 
 If you encounter:
 
@@ -250,7 +242,7 @@ sudo systemctl reload nginx
 
 ---
 
-## 7. Notes
+## 6. Notes
 
 - SonarQube scans on `push to branch` and `merge` events.
 - You **do not need to recreate** the project every time — once created, just reuse the `projectKey`.
