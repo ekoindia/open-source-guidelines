@@ -155,11 +155,6 @@ jobs:
             -Dsonar.sources=.
             -Dsonar.exclusions=node_modules/**,dist/**
             -Dsonar.sourceEncoding=UTF-8
-
-      - name: SonarQube Quality Gate
-        uses: SonarSource/sonarqube-quality-gate-action@v1.0
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 ```
 
 ###### For Java Projects:
@@ -203,11 +198,6 @@ jobs:
             -Dsonar.projectName=Your-Java-Project
             -Dsonar.sources=src
             -Dsonar.sourceEncoding=UTF-8
-
-      - name: SonarQube Quality Gate
-        uses: SonarSource/sonarqube-quality-gate-action@v1.0
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 ```
 
 ---
