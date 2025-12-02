@@ -98,15 +98,13 @@ services:
 2. Click **"New repository secret"**.
 3. Add:
    - **Name**: `SONARQUBE_TOKEN`
-   - **Value**: Your SonarQube token (global or project-specific)
-   - **NOTE:** This is not needed for _public_ repositories because an organization-level secret is already added with the global token.
-
+     - **Value**: Your SonarQube token (global or project-specific)
+     - **NOTE:** This is not needed for _public_ repositories because an organization-level secret is already added with the global token.
    - **Name**: `SONARQUBE_HOST_URL`
-   - **Value**: Your SonarQube url
-   - **NOTE:** This is not needed for _public_ repositories because an organization-level secret is already added with the global token.
-
+     - **Value**: Your SonarQube url
+     - **NOTE:** This is not needed for _public_ repositories because an organization-level secret is already added with the global token.
    - **Name**: `SONARQUBE_PROJECT_KEY`
-   - **Value**: The Project Key that is present on the UI and should match with the one in Github Secrets. A separate secret shall be created for each repo.
+     - **Value**: The Project Key that is present on the UI and should match with the one in Github Secrets. A separate secret shall be created for each repo.
 
 ---
 
